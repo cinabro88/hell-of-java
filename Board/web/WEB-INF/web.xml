@@ -20,4 +20,17 @@
         <servlet-name>join</servlet-name>
         <url-pattern>/join.do</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>board</servlet-name>
+        <servlet-class>com.hell.board.controller.BoardController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>board</servlet-name>
+        <url-pattern>/board.do</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>com.hell.board.ContextListener</listener-class>
+    </listener>
 </web-app>

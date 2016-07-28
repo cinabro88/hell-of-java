@@ -1,5 +1,8 @@
 package com.hell.board;
 
+import com.hell.board.model.Member;
+import com.hell.board.repository.MemberRepository;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -13,7 +16,10 @@ public class ContextListener implements ServletContextListener {
     }
 
     private void setupDatabase() {
-
+        Member admin = new Member();
+        admin.setId("admin");
+        admin.setPassword("1");
+        MemberRepository.getInstance().save(admin);
     }
 
     @Override

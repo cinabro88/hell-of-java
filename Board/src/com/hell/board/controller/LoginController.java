@@ -12,6 +12,12 @@ import java.io.IOException;
 
 public class LoginController extends HttpServlet {
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("message", "asdfasdf");
+        req.getRequestDispatcher("alert.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
         String password = req.getParameter("password");
@@ -45,7 +51,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("id", id);
 
-        resp.sendRedirect("/board.jsp");
+        resp.sendRedirect("/board.do");
     }
 
     private void goJoinPage(HttpServletResponse response) throws IOException {
