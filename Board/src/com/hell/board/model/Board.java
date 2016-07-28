@@ -6,9 +6,18 @@ import java.util.Date;
  * Created by mingook on 2016년7월 27일 (수).
  */
 public class Board {
+    private int index;
     private String title;
     private String content;
     private String author;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
     public String getTitle() {
         return title;

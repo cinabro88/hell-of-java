@@ -21,7 +21,7 @@
         <tbody>
         <c:forEach items="${requestScope.boards}" var="board">
             <tr>
-                <td>1</td>
+                <td>${board.index}</td>
                 <td>${board.title}</td>
                 <td>${board.content}</td>
                 <td>${board.author}</td>

@@ -19,6 +19,12 @@ public class BoardController extends HttpServlet {
         List<Board> boards = BoardRepository.getInstance().findAll();
         req.setAttribute("boards", boards);
 
+        System.out.println();
+        System.out.println(">>> board <<<");
+        for (Board board : boards) {
+            System.out.println("id[" + board.getAuthor() + "], title[" + board.getTitle() + "], content[" + board.getContent() + "]");
+        }
+
         req.getRequestDispatcher("board/list.jsp").forward(req, resp);
     }
 
@@ -34,7 +40,10 @@ public class BoardController extends HttpServlet {
         board.setContent(content);
         board.setTitle(title);
 
+        System.out.println("id[" + id + "], title[" + title + "], content[" + content + "]");
+
         BoardRepository repository = BoardRepository.getInstance();
+        board.setIndex(repository.findAll().size() + 1);
         repository.save(board);
 
         resp.sendRedirect("/board.do");
