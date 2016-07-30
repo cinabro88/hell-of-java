@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../template/header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 <form role="form" action="/board.do" method="post">
     <div class="form-group">
@@ -13,4 +13,4 @@
     <button type="submit" class="btn btn-default">완료</button>
 </form>
 <br/>
-<%@ include file="../template/footer.jsp" %>
+<%@ include file="../footer.jsp" %>

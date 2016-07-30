@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="../template/header.jsp" %>
+<%@ include file="../header.jsp" %>
 <div class="row">
     <div class="col-lg-1">
         <a class="btn btn-default" href="board/write.jsp" role="button">글쓰기</a>
@@ -30,4 +30,4 @@
         </tbody>
     </table>
 </div>
-<%@ include file="../template/footer.jsp" %>
+<%@ include file="../footer.jsp" %>
