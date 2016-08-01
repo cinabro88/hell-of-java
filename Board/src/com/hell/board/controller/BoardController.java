@@ -25,7 +25,7 @@ public class BoardController extends HttpServlet {
             System.out.println("id[" + board.getAuthor() + "], title[" + board.getTitle() + "], content[" + board.getContent() + "]");
         }
 
-        req.getRequestDispatcher("board/list.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/view/board/list.jsp").forward(req, resp);
     }
 
     @Override

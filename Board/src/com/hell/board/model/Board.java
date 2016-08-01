@@ -11,6 +11,16 @@ public class Board {
     private String content;
     private String author;
 
+    public Board() {
+    }
+
+    public Board(int index, String title, String content, String author) {
+        this.title = title;
+        this.index = index;
+        this.content = content;
+        this.author = author;
+    }
+
     public int getIndex() {
         return index;
     }
