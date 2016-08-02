@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../header.jsp" %>
 <div class="container">
-    <form role="form" action="/board.do" method="post">
+    <form role="form" action="/writeBoard.do" method="post">
         <div class="form-group">
             <label for="title">제목</label>
             <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력하세요.">

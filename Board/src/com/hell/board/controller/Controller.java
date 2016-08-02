@@ -1,5 +1,12 @@
 package com.hell.board.controller;
 
+import com.hell.board.controller.board.BoardListCommand;
+import com.hell.board.controller.board.WriteBoardCommand;
+import com.hell.board.controller.board.WriteBoardPageCommand;
+import com.hell.board.controller.member.JoinCommand;
+import com.hell.board.controller.member.JoinPageCommand;
+import com.hell.board.controller.member.LoginCommand;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,23 +19,44 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGetAndPost(request, response);
+        Command command = null;
+
+        switch (request.getRequestURI()) {
+            case "/":
+            case "/board.do":
+                command = new BoardListCommand(request, response);
+                break;
+            case "/join.do":
+                command = new JoinPageCommand(request, response);
+                break;
+            case "/writeBoard.do":
+                command = new WriteBoardPageCommand(request, response);
+                break;
+        }
+
+        if (command != null) {
+            command.execute();
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGetAndPost(request, response);
-    }
+        Command command = null;
 
-    private void doGetAndPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         switch (request.getRequestURI()) {
-            case "/":
-                request.getRequestDispatcher("WEB-INF/view/board/list.jsp").forward(request, response);
+            case "/login.do":
+                command = new LoginCommand(request, response);
                 break;
-            case "login.do":
+            case "/join.do":
+                command = new JoinCommand(request, response);
                 break;
-            case "join.do":
+            case "/writeBoard.do":
+                command = new WriteBoardCommand(request, response);
                 break;
+        }
+
+        if (command != null) {
+            command.execute();
         }
     }
 }

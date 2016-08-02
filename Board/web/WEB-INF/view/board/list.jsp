@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-lg-1">
-            <a class="btn btn-default" href="write.do" role="button">글쓰기</a>
+            <a class="btn btn-default" href="writeBoard.do" role="button">글쓰기</a>
         </div>
     </div>
     <div class="row">
