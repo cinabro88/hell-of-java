@@ -3,6 +3,7 @@ package com.hell.board.controller;
 import com.hell.board.controller.board.BoardListCommand;
 import com.hell.board.controller.board.WriteBoardCommand;
 import com.hell.board.controller.board.WriteBoardPageCommand;
+import com.hell.board.controller.common.AlertCommand;
 import com.hell.board.controller.member.JoinCommand;
 import com.hell.board.controller.member.JoinPageCommand;
 import com.hell.board.controller.member.LoginCommand;
@@ -36,6 +37,9 @@ public class Controller extends HttpServlet {
             case "/logout.do":
                 command = new LogoutCommand(request, response);
                 break;
+            case "/alert.do":
+                command = new AlertCommand(request, response);
+                break;
         }
 
         if (command != null) {
@@ -48,6 +52,10 @@ public class Controller extends HttpServlet {
         Command command = null;
 
         switch (request.getRequestURI()) {
+            case "/alert.do":
+                // TODO alert.do의 경우 get, post 양쪽에 있는데, 이렇게 안하려면 어떻게 하면 좋을까?
+                command = new AlertCommand(request, response);
+                break;
             case "/login.do":
                 command = new LoginCommand(request, response);
                 break;

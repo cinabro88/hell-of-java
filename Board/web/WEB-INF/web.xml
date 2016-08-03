@@ -15,6 +15,7 @@
         <url-pattern>/writeBoard.do</url-pattern>
         <url-pattern>/board.do</url-pattern>
         <url-pattern>/logout.do</url-pattern>
+        <url-pattern>/alert.do</url-pattern>
     </servlet-mapping>
 
     <listener>

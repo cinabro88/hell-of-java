@@ -34,7 +34,7 @@ public class LoginCommand extends Command {
 
     private void onLoginFailed() throws ServletException, IOException {
         request.setAttribute("message", "아이디, 비밀번호를 확인해주세요.");
-        request.getRequestDispatcher("alert.jsp").forward(request, response);
+        request.getRequestDispatcher("alert.do").forward(request, response);
     }
 
     private void onLoginSucceed(String id) throws IOException {

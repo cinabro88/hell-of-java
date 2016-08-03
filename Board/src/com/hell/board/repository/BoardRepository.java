@@ -3,10 +3,8 @@ package com.hell.board.repository;
 import com.hell.board.model.Board;
 import com.hell.board.repository.util.QueryExecutor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +30,24 @@ public class BoardRepository {
             @Override
             protected PreparedStatement query(Connection connection) throws SQLException {
                 PreparedStatement pstmt = connection.prepareStatement(
-                        "SELECT index, title, content, author " +
+                        "SELECT index, title, content, author, updated, hits " +
                                 "FROM board");
 
                 ResultSet rs = pstmt.executeQuery();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
                 while (rs.next()) {
-                    boards.add(new Board(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                    java.util.Date updated = new java.util.Date(rs.getDate(5) == null ? 0 : rs.getDate(5).getTime());
+
+                    boards.add(
+                            new Board(
+                                    rs.getInt(1),
+                                    rs.getString(2),
+                                    rs.getString(3),
+                                    rs.getString(4),
+                                    dateFormat.format(updated),
+                                    rs.getInt(6)
+                            )
+                    );
                 }
                 return pstmt;
             }
@@ -46,18 +56,21 @@ public class BoardRepository {
         return boards;
     }
 
-    public void save(Board board) {
+    public void insert(Board board) {
         new QueryExecutor() {
             @Override
             protected PreparedStatement query(Connection connection) throws SQLException {
                 PreparedStatement pstmt = connection.prepareStatement(
-                        "INSERT INTO board (title, content, author)" +
-                                "VALUES(?, ?, ?)"
+                        "INSERT INTO board (title, content, author, updated, hits)" +
+                                "VALUES(?, ?, ?, ?, ?)"
                 );
 
                 pstmt.setString(1, board.getTitle());
                 pstmt.setString(2, board.getContent());
                 pstmt.setString(3, board.getAuthor());
+                pstmt.setDate(4, new Date(System.currentTimeMillis()));
+                pstmt.setInt(5, board.getHits());
+
                 pstmt.executeUpdate();
 
                 return pstmt;

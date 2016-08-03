@@ -40,13 +40,13 @@ public class JoinCommand extends Command {
         MemberRepository.getInstance().save(member);
 
         request.setAttribute("message", "가입에 성공했습니다.");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("alert.do");
         dispatcher.forward(request, response);
     }
 
     private void processDuplicateId() throws ServletException, IOException {
         request.setAttribute("message", "이미 존재하는 아이디 입니다.");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("alert.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("alert.do");
         dispatcher.forward(request, response);
     }
 }

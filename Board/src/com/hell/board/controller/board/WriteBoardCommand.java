@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by mingook on 2016년8월 2일 (화).
@@ -37,7 +36,7 @@ public class WriteBoardCommand extends Command {
 
         BoardRepository repository = BoardRepository.getInstance();
         board.setIndex(repository.findAll().size() + 1);
-        repository.save(board);
+        repository.insert(board);
 
         response.sendRedirect("/board.do");
     }

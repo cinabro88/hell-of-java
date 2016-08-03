@@ -24,9 +24,9 @@
                 <tr>
                     <td class="text-center">${board.index}</td>
                     <td>${board.title}</td>
-                    <td class="text-center">${board.content}</td>
                     <td class="text-center">${board.author}</td>
-                    <td class="text-center">${board.author}</td>
+                    <td class="text-center">${board.updated}</td>
+                    <td class="text-center">${board.hits}</td>
                 </tr>
             </c:forEach>
             </tbody>

@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-                <h1 id="forms">회원가입</h1>
+                <h2>회원가입</h2>
             </div>
         </div>
     </div>

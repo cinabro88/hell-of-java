@@ -10,15 +10,19 @@ public class Board {
     private String title;
     private String content;
     private String author;
+    private String updated;
+    private int hits;
 
     public Board() {
     }
 
-    public Board(int index, String title, String content, String author) {
+    public Board(int index, String title, String content, String author, String updated, int hits) {
         this.title = title;
         this.index = index;
         this.content = content;
         this.author = author;
+        this.updated = updated;
+        this.hits = hits;
     }
 
     public int getIndex() {
@@ -51,5 +55,21 @@ public class Board {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public int getHits() {
+        return hits;
+    }
+
+    public void setHits(int hits) {
+        this.hits = hits;
     }
 }
