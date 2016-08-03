@@ -3,6 +3,7 @@ package com.hell.board.controller.member;
 import com.hell.board.controller.Command;
 import com.hell.board.model.Member;
 import com.hell.board.repository.MemberRepository;
+import com.hell.board.service.MemberService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +16,11 @@ import java.io.IOException;
  */
 public class LoginCommand extends Command {
 
+    private MemberService memberService;
+
     public LoginCommand(HttpServletRequest request, HttpServletResponse response) {
         super(request, response);
+        memberService = new MemberService();
     }
 
     @Override
@@ -24,8 +28,7 @@ public class LoginCommand extends Command {
         String id = request.getParameter("id");
         String password = request.getParameter("password");
 
-        Member member = MemberRepository.getInstance().findById(id);
-        if (member != null && member.getPassword().equals(password)) {
+        if (memberService.login(id, password)) {
             onLoginSucceed(id);
         } else {
             onLoginFailed();

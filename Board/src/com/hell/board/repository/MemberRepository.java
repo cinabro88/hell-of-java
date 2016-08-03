@@ -53,7 +53,7 @@ public class MemberRepository {
         return members.size() == 0 ? null : members.get(0);
     }
 
-    public void save(Member member) {
+    public void insert(Member member) {
         new QueryExecutor() {
             @Override
             protected PreparedStatement query(Connection connection) throws SQLException {
