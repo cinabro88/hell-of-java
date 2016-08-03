@@ -31,7 +31,8 @@ public class BoardRepository {
             protected PreparedStatement query(Connection connection) throws SQLException {
                 PreparedStatement pstmt = connection.prepareStatement(
                         "SELECT index, title, content, author, updated, hits " +
-                                "FROM board");
+                                "FROM board " +
+                                "ORDER BY index DESC ");
 
                 ResultSet rs = pstmt.executeQuery();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
