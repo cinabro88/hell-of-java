@@ -70,7 +70,7 @@ public class BoardRepository {
                 pstmt.setString(2, board.getContent());
                 pstmt.setString(3, board.getAuthor());
                 pstmt.setDate(4, new Date(System.currentTimeMillis()));
-                pstmt.setInt(5, board.getHits());
+                pstmt.setInt(5, 0);
 
                 pstmt.executeUpdate();
 

@@ -1,6 +1,9 @@
 package com.hell.board.repository.util;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by mingook on 2016년8월 1일 (월).

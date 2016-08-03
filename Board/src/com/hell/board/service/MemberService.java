@@ -3,10 +3,6 @@ package com.hell.board.service;
 import com.hell.board.model.Member;
 import com.hell.board.repository.MemberRepository;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import java.io.IOException;
-
 /**
  * Created by mingook on 2016년7월 30일 (토).
  */

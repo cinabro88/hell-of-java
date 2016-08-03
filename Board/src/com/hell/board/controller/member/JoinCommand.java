@@ -2,7 +2,6 @@ package com.hell.board.controller.member;
 
 import com.hell.board.controller.Command;
 import com.hell.board.model.Member;
-import com.hell.board.repository.MemberRepository;
 import com.hell.board.service.MemberService;
 
 import javax.servlet.RequestDispatcher;

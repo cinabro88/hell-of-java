@@ -3,6 +3,7 @@ package com.hell.board.controller.board;
 import com.hell.board.controller.Command;
 import com.hell.board.model.Board;
 import com.hell.board.repository.BoardRepository;
+import com.hell.board.service.BoardService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,12 @@ import java.io.IOException;
  * Created by mingook on 2016년8월 2일 (화).
  */
 public class WriteBoardCommand extends Command {
+
+    private BoardService boardService;
+
     public WriteBoardCommand(HttpServletRequest request, HttpServletResponse response) {
         super(request, response);
+        boardService = new BoardService();
     }
 
     @Override
@@ -26,18 +31,7 @@ public class WriteBoardCommand extends Command {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
 
-        Board board = new Board();
-        board.setAuthor(id);
-        board.setContent(content);
-        board.setTitle(title);
-
-        System.out.println(" >>>>>>>>>> Write");
-        System.out.println("id[" + id + "], title[" + title + "], content[" + content + "]");
-
-        BoardRepository repository = BoardRepository.getInstance();
-        board.setIndex(repository.findAll().size() + 1);
-        repository.insert(board);
-
+        boardService.writeBoard(title, content, id);
         response.sendRedirect("/board.do");
     }
 }

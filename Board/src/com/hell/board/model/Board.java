@@ -1,7 +1,5 @@
 package com.hell.board.model;
 
-import java.util.Date;
-
 /**
  * Created by mingook on 2016년7월 27일 (수).
  */
@@ -13,9 +11,6 @@ public class Board {
     private String updated;
     private int hits;
 
-    public Board() {
-    }
-
     public Board(int index, String title, String content, String author, String updated, int hits) {
         this.title = title;
         this.index = index;
@@ -23,6 +18,12 @@ public class Board {
         this.author = author;
         this.updated = updated;
         this.hits = hits;
+    }
+
+    public Board(String title, String content, String author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
     }
 
     public int getIndex() {
