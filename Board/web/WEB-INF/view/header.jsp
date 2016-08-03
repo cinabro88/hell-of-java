@@ -11,6 +11,7 @@
     <meta name="author" content="">
     <title>Hell Java</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" rel="stylesheet">
+    <%--<link href="/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>--%>
     <style type="text/css">
         /** {*/
         /*font-family: NanumGothic, 'Malgun Gothic';*/
@@ -34,7 +35,7 @@
                 <c:when test="${sessionScope.id == null}">
                     <form class="navbar-form navbar-right" role="form" action="login.do" method="post">
                         <div class="form-group">
-                            <input type="text" placeholder="이메일" class="form-control" name="id">
+                            <input type="text" placeholder="아이디" class="form-control" name="id">
                         </div>
                         <div class="form-group">
                             <input type="password" placeholder="패스워드" class="form-control" name="password">
@@ -45,7 +46,7 @@
                 </c:when>
                 <c:otherwise>
                     <div class="nav navbar-nav navbar-right">
-                        <a href="#" class="btn btn-danger navbar-btn">로그아웃</a>
+                        <a href="logout.do" class="btn btn-danger navbar-btn">로그아웃</a>
                     </div>
                 </c:otherwise>
             </c:choose>

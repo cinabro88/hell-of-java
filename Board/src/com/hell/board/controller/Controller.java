@@ -6,6 +6,7 @@ import com.hell.board.controller.board.WriteBoardPageCommand;
 import com.hell.board.controller.member.JoinCommand;
 import com.hell.board.controller.member.JoinPageCommand;
 import com.hell.board.controller.member.LoginCommand;
+import com.hell.board.controller.member.LogoutCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +32,9 @@ public class Controller extends HttpServlet {
                 break;
             case "/writeBoard.do":
                 command = new WriteBoardPageCommand(request, response);
+                break;
+            case "/logout.do":
+                command = new LogoutCommand(request, response);
                 break;
         }
 
