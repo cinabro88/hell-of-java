@@ -19,4 +19,8 @@ public class BoardService {
         Board board = new Board(title, content, author);
         repository.insert(board);
     }
+
+    public Board findBoardByIndex(int index) {
+        return repository.findByIndex(index);
+    }
 }

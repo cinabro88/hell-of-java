@@ -1,5 +1,6 @@
 package com.hell.board.controller;
 
+import com.hell.board.controller.board.BoardDetailCommand;
 import com.hell.board.controller.board.BoardListCommand;
 import com.hell.board.controller.board.WriteBoardCommand;
 import com.hell.board.controller.board.WriteBoardPageCommand;
@@ -39,6 +40,9 @@ public class Controller extends HttpServlet {
                 break;
             case "/alert.do":
                 command = new AlertCommand(request, response);
+                break;
+            case "/boardDetail.do":
+                command = new BoardDetailCommand(request, response);
                 break;
         }
 

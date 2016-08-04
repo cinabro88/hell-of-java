@@ -1,5 +1,9 @@
 package com.hell.board.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by mingook on 2016년7월 27일 (수).
  */
@@ -10,6 +14,8 @@ public class Board {
     private String author;
     private String updated;
     private int hits;
+
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
     public Board(int index, String title, String content, String author, String updated, int hits) {
         this.title = title;
@@ -24,6 +30,18 @@ public class Board {
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    // 이런식으로 하면.. ResultSet 컬럼의 인덱스 순서에 의존적이긴 하지만. 일단 이렇게..
+    public Board(ResultSet rs) throws SQLException {
+        this(
+                rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                dateFormat.format(rs.getDate(5).getTime()),
+                rs.getInt(6)
+        );
     }
 
     public int getIndex() {

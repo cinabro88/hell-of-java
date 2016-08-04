@@ -2,26 +2,24 @@
 <%@ include file="../header.jsp" %>
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <div class="page-header">
-                <h2>글쓰기</h2>
+                <h2>${board.title}</h2>
             </div>
         </div>
     </div>
+    <div class="row col-md-12">
+        <p><strong>작성자 : ${board.author}</strong></p>
+    </div>
 
-    <form role="form" action="/writeBoard.do" method="post">
-        <div class="form-group">
-            <label for="title">제목</label>
-            <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력하세요.">
-        </div>
-        <div class="form-group">
-            <label for="content">내용</label>
-            <textarea rows="10" name="content" class="form-control" id="content" placeholder="내용을 입력하세요."></textarea>
-        </div>
+    <div class="jumbotron row col-md-12">
+        ${board.content}
+    </div>
+    <div class="row col-md-12">
         <div class="text-right">
-            <button type="submit" class="btn btn-default">완료</button>
+            <a href="#" class="btn btn-primary">수정</a>
+            <a href="#" class="btn btn-danger">삭제</a>
         </div>
-    </form>
-    <br/>
+    </div>
 </div>
 <%@ include file="../footer.jsp" %>

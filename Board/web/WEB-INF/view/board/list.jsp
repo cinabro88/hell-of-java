@@ -23,7 +23,7 @@
             <c:forEach items="${requestScope.boards}" var="board">
                 <tr>
                     <td class="text-center">${board.index}</td>
-                    <td>${board.title}</td>
+                    <td><a href="boardDetail.do?index=${board.index}">${board.title}</a></td>
                     <td class="text-center">${board.author}</td>
                     <td class="text-center">${board.updated}</td>
                     <td class="text-center">${board.hits}</td>

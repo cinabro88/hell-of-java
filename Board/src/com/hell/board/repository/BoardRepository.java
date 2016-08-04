@@ -35,20 +35,10 @@ public class BoardRepository {
                                 "ORDER BY index DESC ");
 
                 ResultSet rs = pstmt.executeQuery();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
                 while (rs.next()) {
                     java.util.Date updated = new java.util.Date(rs.getDate(5) == null ? 0 : rs.getDate(5).getTime());
 
-                    boards.add(
-                            new Board(
-                                    rs.getInt(1),
-                                    rs.getString(2),
-                                    rs.getString(3),
-                                    rs.getString(4),
-                                    dateFormat.format(updated),
-                                    rs.getInt(6)
-                            )
-                    );
+                    boards.add(new Board(rs));
                 }
                 return pstmt;
             }
@@ -77,5 +67,33 @@ public class BoardRepository {
                 return pstmt;
             }
         }.execute();
+    }
+
+    public Board findByIndex(int index) {
+        List<Board> boards = new ArrayList<>();
+
+        new QueryExecutor() {
+            @Override
+            protected PreparedStatement query(Connection connection) throws SQLException {
+                PreparedStatement pstmt = connection.prepareStatement(
+                        "SELECT index, title, content, author, updated, hits " +
+                                "FROM board " +
+                                "WHERE index=?"
+                );
+
+                pstmt.setInt(1, index);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    boards.add(new Board(rs));
+                } else {
+                    boards.add(null);
+                }
+
+
+                return pstmt;
+            }
+        }.execute();
+
+        return boards.get(0);
     }
 }
