@@ -1,11 +1,9 @@
 package com.hell.board.repository;
 
 import com.hell.board.model.Board;
-import com.hell.board.repository.util.QueryExecutor;
+import com.hell.board.repository.util.JdbcExecutor;
 
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -25,75 +23,37 @@ public class BoardRepository {
     }
 
     public List<Board> findAll() {
-        List<Board> boards = new ArrayList<>();
-        new QueryExecutor() {
-            @Override
-            protected PreparedStatement query(Connection connection) throws SQLException {
-                PreparedStatement pstmt = connection.prepareStatement(
-                        "SELECT index, title, content, author, updated, hits " +
-                                "FROM board " +
-                                "ORDER BY index DESC ");
-
-                ResultSet rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    java.util.Date updated = new java.util.Date(rs.getDate(5) == null ? 0 : rs.getDate(5).getTime());
-
-                    boards.add(new Board(rs));
-                }
-                return pstmt;
-            }
-        }.execute();
-
-        return boards;
+        return JdbcExecutor.query(connection -> connection.prepareStatement(
+                "SELECT index, title, content, author, updated, hits " +
+                        "FROM board " +
+                        "ORDER BY index DESC "),
+                Board.getRowMapper()
+        );
     }
 
-    public void insert(Board board) {
-        new QueryExecutor() {
-            @Override
-            protected PreparedStatement query(Connection connection) throws SQLException {
-                PreparedStatement pstmt = connection.prepareStatement(
+    public int insert(Board board) {
+        return JdbcExecutor.update(
+                connection -> connection.prepareStatement(
                         "INSERT INTO board (title, content, author, updated, hits)" +
                                 "VALUES(?, ?, ?, ?, ?)"
-                );
-
-                pstmt.setString(1, board.getTitle());
-                pstmt.setString(2, board.getContent());
-                pstmt.setString(3, board.getAuthor());
-                pstmt.setDate(4, new Date(System.currentTimeMillis()));
-                pstmt.setInt(5, 0);
-
-                pstmt.executeUpdate();
-
-                return pstmt;
-            }
-        }.execute();
+                ),
+                board.getTitle(),
+                board.getContent(),
+                board.getAuthor(),
+                new Date(System.currentTimeMillis()),
+                0
+        );
     }
 
     public Board findByIndex(int index) {
-        List<Board> boards = new ArrayList<>();
-
-        new QueryExecutor() {
-            @Override
-            protected PreparedStatement query(Connection connection) throws SQLException {
-                PreparedStatement pstmt = connection.prepareStatement(
+        return JdbcExecutor.queryForObject(
+                connection -> connection.prepareStatement(
                         "SELECT index, title, content, author, updated, hits " +
                                 "FROM board " +
                                 "WHERE index=?"
-                );
-
-                pstmt.setInt(1, index);
-                ResultSet rs = pstmt.executeQuery();
-                if (rs.next()) {
-                    boards.add(new Board(rs));
-                } else {
-                    boards.add(null);
-                }
-
-
-                return pstmt;
-            }
-        }.execute();
-
-        return boards.get(0);
+                ),
+                Board.getRowMapper(),
+                index
+        );
     }
 }

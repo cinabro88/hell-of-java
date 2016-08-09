@@ -1,5 +1,7 @@
 package com.hell.board.model;
 
+import com.hell.board.repository.util.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -90,5 +92,16 @@ public class Board {
 
     public void setHits(int hits) {
         this.hits = hits;
+    }
+
+    public static RowMapper<Board> getRowMapper() {
+        return rs -> new Board(
+                rs.getInt("index"),
+                rs.getString("title"),
+                rs.getString("content"),
+                rs.getString("author"),
+                rs.getString("updated"),
+                rs.getInt("hits")
+        );
     }
 }

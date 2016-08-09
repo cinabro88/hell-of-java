@@ -1,5 +1,7 @@
 package com.hell.board.model;
 
+import com.hell.board.repository.util.RowMapper;
+
 /**
  * Created by mingook on 2016년7월 27일 (수).
  */
@@ -29,5 +31,9 @@ public class Member {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public static RowMapper<Member> getRowMapper() {
+        return rs -> new Member(rs.getString("id"), rs.getString(("password")));
     }
 }

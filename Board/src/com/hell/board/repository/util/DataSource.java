@@ -8,21 +8,21 @@ import java.sql.Statement;
 /**
  * Created by mingook on 2016년8월 1일 (월).
  */
-public class ConnectionManager {
+public class DataSource {
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_URL = "jdbc:h2:tcp://localhost/~/test";
     private static final String DB_ID = "sa";
     private static final String DB_PASSWORD = "";
 
-    private static ConnectionManager instance;
+    private static DataSource instance;
 
-    private ConnectionManager() {
+    private DataSource() {
 
     }
 
-    public static ConnectionManager getInstance() {
+    public static DataSource getInstance() {
         if (instance == null) {
-            instance = new ConnectionManager();
+            instance = new DataSource();
         }
 
         return instance;

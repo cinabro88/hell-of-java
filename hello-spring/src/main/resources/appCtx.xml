@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSource"
+          class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="org.h2.Driver"/>
+        <property name="jdbcUrl"
+                  value="jdbc:h2:tcp://localhost/~/hello-spring"/>
+        <property name="user" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean id="memberDao" class="spring.MemberDao">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <bean id="memberRegSvc" class="spring.MemberRegisterService">
+        <constructor-arg ref="memberDao"/>
+    </bean>
+
+    <bean id="changePwdSvc" class="spring.ChangePasswordService">
+        <constructor-arg ref="memberDao"/>
+    </bean>
+</beans>

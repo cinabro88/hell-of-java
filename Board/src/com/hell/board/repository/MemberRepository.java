@@ -5,7 +5,7 @@ package com.hell.board.repository;
  */
 
 import com.hell.board.model.Member;
-import com.hell.board.repository.util.QueryExecutor;
+import com.hell.board.repository.util.JdbcExecutor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,36 +33,21 @@ public class MemberRepository {
      * 더 좋은 방법은 없을까?
      */
     public Member findById(String id) {
-        List<Member> members = new ArrayList<>();
-        new QueryExecutor() {
-            @Override
-            protected PreparedStatement query(Connection connection) throws SQLException {
-                PreparedStatement pstmt = connection.prepareStatement(
+        return JdbcExecutor.queryForObject(
+                connection -> connection.prepareStatement(
                         "SELECT id, password " +
                                 "FROM member " +
-                                "WHERE id = ?");
-                pstmt.setString(1, id);
-                ResultSet rs = pstmt.executeQuery();
-                while (rs.next()) {
-                    members.add(new Member(rs.getString(1), rs.getString(2)));
-                }
-                return pstmt;
-            }
-        }.execute();
-
-        return members.size() == 0 ? null : members.get(0);
+                                "WHERE id = ?"
+                ),
+                Member.getRowMapper(),
+                id
+        );
     }
 
-    public void insert(Member member) {
-        new QueryExecutor() {
-            @Override
-            protected PreparedStatement query(Connection connection) throws SQLException {
-                PreparedStatement pstmt =
-                        connection.prepareStatement("INSERT INTO member (id, password) VALUES(?, ?)");
-                pstmt.setString(1, member.getId());
-                pstmt.setString(1, member.getPassword());
-                return pstmt;
-            }
-        }.execute();
+    public int insert(Member member) {
+        return JdbcExecutor.update(
+                connection -> connection.prepareStatement("INSERT INTO member (id, password) VALUES(?, ?)"),
+                member.getId(), member.getPassword()
+        );
     }
 }
