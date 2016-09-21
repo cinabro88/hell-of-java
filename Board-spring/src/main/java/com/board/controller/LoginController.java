@@ -35,6 +35,6 @@ public class LoginController {
         }
 
         session.setAttribute("id", id);
-        return "board/list";
+        return "redirect:/";
     }
 }

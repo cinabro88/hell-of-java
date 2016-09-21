@@ -1,11 +1,15 @@
 package com.board.controller;
 
+import com.board.model.Board;
 import com.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -20,41 +24,32 @@ public class BoardController {
     private BoardService boardService;
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        List<Board> boards = boardService.findAllBoards();
+        model.addAttribute("boards", boards);
         return "/board/list";
     }
 
-    @RequestMapping("join")
-    public String join() {
-        return "/member/join";
-    }
-
-    @RequestMapping(value = "writeBoard", method = GET)
+    @RequestMapping(value = "/board/write", method = GET)
     public String writeBoard() {
         return "/board/write";
     }
 
-    @RequestMapping(value = "writeBoard", method = POST)
+    @RequestMapping(value = "/board/write", method = POST)
     public String writeBoard(@SessionAttribute("id") String id,
                              @RequestParam("title") String title,
                              @RequestParam("content") String content) {
 
         boardService.writeBoard(title, content, id);
-        return "/";
+        return "redirect:/";
     }
 
-    @RequestMapping("logout")
-    public String logout() {
-        return "/member/logout";
+    @RequestMapping("/board/detail")
+    public String boardDetail(Model model,
+                              @RequestParam("index") int index) {
+        Board board = boardService.findBoardByIndex(index);
+        model.addAttribute("board", board);
+        return "/board/detail";
     }
 
-    @RequestMapping("alert")
-    public String alert() {
-        return "/alert";
-    }
-
-    @RequestMapping("boardDetail")
-    public String boardDetail() {
-        return "/board/detaeil";
-    }
 }

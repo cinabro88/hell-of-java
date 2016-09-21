@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <form role="form" action="/writeBoard" method="post">
+    <form role="form" action="/board/write" method="post">
         <div class="form-group">
             <label for="title">제목</label>
             <input type="text" name="title" class="form-control" id="title" placeholder="제목을 입력하세요.">

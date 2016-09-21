@@ -23,7 +23,7 @@
             <c:forEach items="${requestScope.boards}" var="board">
                 <tr>
                     <td class="text-center">${board.index}</td>
-                    <td><a href="boardDetail?index=${board.index}">${board.title}</a></td>
+                    <td><a href="board/detail?index=${board.index}">${board.title}</a></td>
                     <td class="text-center">${board.author}</td>
                     <td class="text-center">${board.updated}</td>
                     <td class="text-center">${board.hits}</td>
@@ -34,7 +34,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 text-right">
-            <a class="btn btn-default" href="writeBoard" role="button">글쓰기</a>
+            <a class="btn btn-default" href="board/write" role="button">글쓰기</a>
         </div>
     </div>
 </div>
